@@ -213,7 +213,7 @@ open class SideMenuManager: NSObject {
     open weak var menuLeftSwipeToDismissGesture: UIPanGestureRecognizer? {
         didSet {
             oldValue?.view?.removeGestureRecognizer(oldValue!)
-            setupGesture(gesture: menuLeftSwipeToDismissGesture)
+            //setupGesture(gesture: menuLeftSwipeToDismissGesture)
         }
     }
     
@@ -221,7 +221,7 @@ open class SideMenuManager: NSObject {
     open weak var menuRightSwipeToDismissGesture: UIPanGestureRecognizer? {
         didSet {
             oldValue?.view?.removeGestureRecognizer(oldValue!)
-            setupGesture(gesture: menuRightSwipeToDismissGesture)
+            //setupGesture(gesture: menuRightSwipeToDismissGesture)
         }
     }
     
@@ -277,8 +277,8 @@ open class SideMenuManager: NSObject {
         didSet {
             menuLeftSwipeToDismissGesture?.view?.removeGestureRecognizer(menuLeftSwipeToDismissGesture!)
             menuRightSwipeToDismissGesture?.view?.removeGestureRecognizer(menuRightSwipeToDismissGesture!)
-            setupNavigationController(menuLeftNavigationController, leftSide: true)
-            setupNavigationController(menuRightNavigationController, leftSide: false)
+            //setupNavigationController(menuLeftNavigationController, leftSide: true)
+            //setupNavigationController(menuRightNavigationController, leftSide: false)
         }
     }
     
@@ -391,15 +391,15 @@ open class SideMenuManager: NSObject {
      
      - Returns: The pan gesture added to `toView`.
      */
-//    @discardableResult open func menuAddPanGestureToPresent(toView: UIView) -> UIPanGestureRecognizer {
-//        let panGestureRecognizer = UIPanGestureRecognizer()
-//        panGestureRecognizer.addTarget(transition, action:#selector(SideMenuTransition.handlePresentMenuPan(_:)))
-//        toView.addGestureRecognizer(panGestureRecognizer)
-//
-//        if menuLeftNavigationController ?? menuRightNavigationController == nil {
-//            print("SideMenu Warning: menuAddPanGestureToPresent called before menuLeftNavigationController or menuRightNavigationController have been defined. Gestures will not work without a menu.")
-//        }
-//        
-//        return panGestureRecognizer
-//    }
+    @discardableResult open func menuAddPanGestureToPresent(toView: UIView) -> UIPanGestureRecognizer {
+        let panGestureRecognizer = UIPanGestureRecognizer()
+        panGestureRecognizer.addTarget(transition, action:#selector(SideMenuTransition.handlePresentMenuPan(_:)))
+        toView.addGestureRecognizer(panGestureRecognizer)
+
+        if menuLeftNavigationController ?? menuRightNavigationController == nil {
+            print("SideMenu Warning: menuAddPanGestureToPresent called before menuLeftNavigationController or menuRightNavigationController have been defined. Gestures will not work without a menu.")
+        }
+
+        return panGestureRecognizer
+    }
 }
