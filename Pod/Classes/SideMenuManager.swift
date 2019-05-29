@@ -213,7 +213,7 @@ open class SideMenuManager: NSObject {
     open weak var menuLeftSwipeToDismissGesture: UIPanGestureRecognizer? {
         didSet {
             oldValue?.view?.removeGestureRecognizer(oldValue!)
-            //setupGesture(gesture: menuLeftSwipeToDismissGesture)
+            setupGesture(gesture: menuLeftSwipeToDismissGesture)
         }
     }
     
@@ -221,7 +221,7 @@ open class SideMenuManager: NSObject {
     open weak var menuRightSwipeToDismissGesture: UIPanGestureRecognizer? {
         didSet {
             oldValue?.view?.removeGestureRecognizer(oldValue!)
-            //setupGesture(gesture: menuRightSwipeToDismissGesture)
+            setupGesture(gesture: menuRightSwipeToDismissGesture)
         }
     }
     
@@ -230,7 +230,7 @@ open class SideMenuManager: NSObject {
             return
         }
         
-        gesture.addTarget(transition, action:#selector(SideMenuTransition.handleHideMenuPan(_:)))
+        //gesture.addTarget(transition, action:#selector(SideMenuTransition.handleHideMenuPan(_:)))
     }
     
     fileprivate func setupNavigationController(_ forMenu: UISideMenuNavigationController?, leftSide: Bool) {
@@ -277,8 +277,8 @@ open class SideMenuManager: NSObject {
         didSet {
             menuLeftSwipeToDismissGesture?.view?.removeGestureRecognizer(menuLeftSwipeToDismissGesture!)
             menuRightSwipeToDismissGesture?.view?.removeGestureRecognizer(menuRightSwipeToDismissGesture!)
-            //setupNavigationController(menuLeftNavigationController, leftSide: true)
-            //setupNavigationController(menuRightNavigationController, leftSide: false)
+            setupNavigationController(menuLeftNavigationController, leftSide: true)
+            setupNavigationController(menuRightNavigationController, leftSide: false)
         }
     }
     
