@@ -391,15 +391,15 @@ open class SideMenuManager: NSObject {
      
      - Returns: The pan gesture added to `toView`.
      */
-    @discardableResult open func menuAddPanGestureToPresent(toView: UIView) -> UIPanGestureRecognizer {
-        let panGestureRecognizer = UIPanGestureRecognizer()
-        panGestureRecognizer.addTarget(transition, action:#selector(SideMenuTransition.handlePresentMenuPan(_:)))
-        toView.addGestureRecognizer(panGestureRecognizer)
-        
-        if menuLeftNavigationController ?? menuRightNavigationController == nil {
-            print("SideMenu Warning: menuAddPanGestureToPresent called before menuLeftNavigationController or menuRightNavigationController have been defined. Gestures will not work without a menu.")
-        }
-        
-        return panGestureRecognizer
-    }
+//    @discardableResult open func menuAddPanGestureToPresent(toView: UIView) -> UIPanGestureRecognizer {
+//        let panGestureRecognizer = UIPanGestureRecognizer()
+//        panGestureRecognizer.addTarget(transition, action:#selector(SideMenuTransition.handlePresentMenuPan(_:)))
+//        toView.addGestureRecognizer(panGestureRecognizer)
+//
+//        if menuLeftNavigationController ?? menuRightNavigationController == nil {
+//            print("SideMenu Warning: menuAddPanGestureToPresent called before menuLeftNavigationController or menuRightNavigationController have been defined. Gestures will not work without a menu.")
+//        }
+//        
+//        return panGestureRecognizer
+//    }
 }
