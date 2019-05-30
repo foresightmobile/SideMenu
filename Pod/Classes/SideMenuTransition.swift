@@ -204,7 +204,7 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
 //                activeGesture = nil
 //            }
 //        }
-        swipe.direction = .left
+        swipe.direction = .right
         
         if swipe.state == .ended {
             mainViewController?.dismiss(animated: true, completion: nil)
