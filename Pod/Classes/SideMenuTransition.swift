@@ -42,6 +42,7 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
             
             tapView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             let exitPanGesture = UISwipeGestureRecognizer()
+            exitPanGesture.direction = .left
             exitPanGesture.addTarget(self, action:#selector(SideMenuTransition.handleHideMenuPan(_:)))
             let exitTapGesture = UITapGestureRecognizer()
             exitTapGesture.addTarget(self, action: #selector(SideMenuTransition.handleHideMenuTap(_:)))

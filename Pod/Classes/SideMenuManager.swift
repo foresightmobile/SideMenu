@@ -262,8 +262,10 @@ open class SideMenuManager: NSObject {
             exitPanGesture.cancelsTouchesInView = false
             forMenu.view.addGestureRecognizer(exitPanGesture)
             if leftSide {
+                exitPanGesture.direction = .left
                 menuLeftSwipeToDismissGesture = exitPanGesture
             } else {
+                exitPanGesture.direction = .right
                 menuRightSwipeToDismissGesture = exitPanGesture
             }
         }
