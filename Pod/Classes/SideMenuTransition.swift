@@ -188,7 +188,7 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
 
         case .began:
             interactive = true
-            if pan.velocity(in: pan.view!).x < 0 {
+            if pan.velocity(in: pan.view!).x < 25 {
                 mainViewController?.dismiss(animated: true, completion: nil)
             }
         case .changed:
