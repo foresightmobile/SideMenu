@@ -212,7 +212,7 @@ open class SideMenuManager: NSObject {
     }
     
     /// The left menu swipe to dismiss gesture.
-    open weak var menuLeftSwipeToDismissGesture: UIPanGestureRecognizer? {
+    open weak var menuLeftSwipeToDismissGesture: UISwipeGestureRecognizer? {
         didSet {
             oldValue?.view?.removeGestureRecognizer(oldValue!)
             setupGesture(gesture: menuLeftSwipeToDismissGesture)
@@ -220,14 +220,14 @@ open class SideMenuManager: NSObject {
     }
     
     /// The right menu swipe to dismiss gesture.
-    open weak var menuRightSwipeToDismissGesture: UIPanGestureRecognizer? {
+    open weak var menuRightSwipeToDismissGesture: UISwipeGestureRecognizer? {
         didSet {
             oldValue?.view?.removeGestureRecognizer(oldValue!)
             setupGesture(gesture: menuRightSwipeToDismissGesture)
         }
     }
     
-    fileprivate func setupGesture(gesture: UIPanGestureRecognizer?) {
+    fileprivate func setupGesture(gesture: UISwipeGestureRecognizer?) {
         guard let gesture = gesture else {
             return
         }
@@ -258,7 +258,7 @@ open class SideMenuManager: NSObject {
         forMenu.locked = true
         
         if menuEnableSwipeGestures {
-            let exitPanGesture = UIPanGestureRecognizer()
+            let exitPanGesture = UISwipeGestureRecognizer()
             exitPanGesture.cancelsTouchesInView = false
             forMenu.view.addGestureRecognizer(exitPanGesture)
             if leftSide {
