@@ -16,6 +16,8 @@
      SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
 */
 
+import UIKit
+
 @objcMembers
 open class SideMenuManager: NSObject {
     
@@ -230,7 +232,7 @@ open class SideMenuManager: NSObject {
             return
         }
         
-        //gesture.addTarget(transition, action:#selector(SideMenuTransition.handleHideMenuPan(_:)))
+        gesture.addTarget(transition, action:#selector(SideMenuTransition.handleHideMenuPan(_:)))
     }
     
     fileprivate func setupNavigationController(_ forMenu: UISideMenuNavigationController?, leftSide: Bool) {

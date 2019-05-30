@@ -42,7 +42,7 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
             
             tapView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             let exitPanGesture = UIPanGestureRecognizer()
-            //exitPanGesture.addTarget(self, action:#selector(SideMenuTransition.handleHideMenuPan(_:)))
+            exitPanGesture.addTarget(self, action:#selector(SideMenuTransition.handleHideMenuPan(_:)))
             let exitTapGesture = UITapGestureRecognizer()
             exitTapGesture.addTarget(self, action: #selector(SideMenuTransition.handleHideMenuTap(_:)))
             tapView.addGestureRecognizer(exitPanGesture)
@@ -171,38 +171,40 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
         }
     }
     
-//    @objc internal func handleHideMenuPan(_ pan: UIPanGestureRecognizer) {
-//        if activeGesture == nil {
-//            activeGesture = pan
-//        } else if pan != activeGesture {
-//            pan.isEnabled = false
-//            pan.isEnabled = true
-//            return
-//        }
-//
-//        let translation = pan.translation(in: pan.view!)
-//        let direction:CGFloat = presentDirection == .left ? -1 : 1
-//        let distance = translation.x / menuWidth * direction
-//
-//        switch (pan.state) {
-//
-//        case .began:
-//            interactive = true
-//            mainViewController?.dismiss(animated: true, completion: nil)
-//        case .changed:
-//            update(max(min(distance, 1), 0))
-//        default:
-//            interactive = false
-//            let velocity = pan.velocity(in: pan.view!).x * direction
-//            if velocity >= 100 || velocity >= -50 && distance >= 0.5 {
-//                finish()
-//                activeGesture = nil
-//            } else {
-//                cancel()
-//                activeGesture = nil
-//            }
-//        }
-//    }
+    @objc internal func handleHideMenuPan(_ pan: UIPanGestureRecognizer) {
+        if activeGesture == nil {
+            activeGesture = pan
+        } else if pan != activeGesture {
+            pan.isEnabled = false
+            pan.isEnabled = true
+            return
+        }
+
+        let translation = pan.translation(in: pan.view!)
+        let direction:CGFloat = presentDirection == .left ? -1 : 1
+        let distance = translation.x / menuWidth * direction
+        
+        switch (pan.state) {
+
+        case .began:
+            interactive = true
+            if pan.velocity(in: pan.view!).x < 0 {
+                mainViewController?.dismiss(animated: true, completion: nil)
+            }
+        case .changed:
+            update(max(min(distance, 1), 0))
+        default:
+            interactive = false
+            let velocity = pan.velocity(in: pan.view!).x * direction
+            if velocity >= 100 || velocity >= -50 && distance >= 0.5 {
+                finish()
+                activeGesture = nil
+            } else {
+                cancel()
+                activeGesture = nil
+            }
+        }
+    }
     
     @objc internal func handleHideMenuTap(_ tap: UITapGestureRecognizer) {
         menuViewController?.dismiss(animated: true, completion: nil)
@@ -264,8 +266,8 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
         }
         if let originalSuperview = originalSuperview, let mainView = mainViewController?.view {
             originalSuperview.addSubview(mainView)
-            let y = originalSuperview.bounds.height - mainView.frame.size.height
-            mainView.frame.origin.y = max(y, 0)
+            let yValue = originalSuperview.bounds.height - mainView.frame.size.height
+            mainView.frame.origin.y = max(yValue, 0)
         }
         
         originalSuperview = nil

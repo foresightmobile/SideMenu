@@ -242,7 +242,7 @@ open class UISideMenuNavigationController: UINavigationController {
     }
     
     override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        guard let sideMenuManager = sideMenuManager, viewControllers.count > 0 && sideMenuManager.menuPushStyle != .subMenu else {
+        guard let sideMenuManager = sideMenuManager, !viewControllers.isEmpty && sideMenuManager.menuPushStyle != .subMenu else {
             // NOTE: pushViewController is called by init(rootViewController: UIViewController)
             // so we must perform the normal super method in this case.
             super.pushViewController(viewController, animated: animated)
